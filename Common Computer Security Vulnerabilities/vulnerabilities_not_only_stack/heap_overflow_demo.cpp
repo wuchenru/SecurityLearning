@@ -17,6 +17,17 @@ void malicious() {
 int main() {
     // Step 1: Allocate a heap buffer that we will overflow
     char* buffer = new char[16]; // Allocate a small buffer of 16 bytes on the heap
+    // Allocate a small buffer of 16 bytes on the heap
+    // This buffer is used for the heap overflow attack. We will intentionally write beyond the buffer's allocated space.
+    // In this case, the `Victim` object is allocated immediately after the buffer in memory (for simplicity in this example).
+    // When we overflow the buffer, we are writing data past the 16-byte buffer, which can potentially overwrite
+    // adjacent memory locations. These locations may include the `Victim` object itself, and specifically its vtable pointer.
+    // The vtable pointer controls which virtual function gets executed, and by overwriting this pointer, we can hijack
+    // the program's control flow by pointing it to malicious code.
+    // In a heap overflow, when we write past one object's allocated memory, we can overwrite the vtable pointer of
+    // another object placed adjacent to it in the heap. This is a typical scenario where we exploit the heap layout
+    // and take advantage of the vtable to redirect function calls to attacker-controlled functions.
+
 
     // Step 2: Allocate a victim object that will be targeted by the overflow
     Victim* victim = new Victim();
