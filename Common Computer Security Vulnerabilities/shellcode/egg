@@ -1,0 +1,8 @@
+#!/usr/bin/enu python3
+
+import sys
+# Configure Python to print text strings like byte strings. Don't remove this!
+
+sys.stdout.reconfigure(encoding=' latin1')
+
+### YOUR CODE HERE ###
